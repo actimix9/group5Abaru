@@ -23,15 +23,7 @@
             <div class="col-12">
                 <div class="form-group">
                     <strong>Student:</strong>
-                    <select name="user_id" class="form-control">
-                        <option value="">-- Select Student --</option>
-                        @foreach ($users as $u)
-                            <option value="{{ $u->id }}"
-                                {{ old('user_id', $timetable->user_id) == $u->id ? 'selected' : '' }}>
-                                {{ $u->name }}
-                            </option>
-                        @endforeach
-                    </select>
+                    {{ $timetable->user?->name }}
                 </div>
             </div>
             <div class="col-12">

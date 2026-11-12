@@ -7,7 +7,6 @@ use App\Models\Group;
 use App\Models\Hall;
 use App\Models\Subject;
 use App\Models\Timetable;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class TimetableController extends Controller
@@ -17,7 +16,6 @@ class TimetableController extends Controller
     private function rules(): array
     {
         return [
-            'user_id'           => 'required|exists:users,id',
             'subject_id'        => 'required|exists:subjects,id',
             'day_id'            => 'required|exists:days,id',
             'hall_id'           => 'required|exists:halls,id',
@@ -30,7 +28,6 @@ class TimetableController extends Controller
     private function dropdowns(): array
     {
         return [
-            'users'    => User::all(),
             'subjects' => Subject::all(),
             'days'     => Day::all(),
             'halls'    => Hall::all(),
@@ -51,7 +48,10 @@ class TimetableController extends Controller
 
     public function store(Request $request)
     {
-        Timetable::create($request->validate($this->rules()));
+        $data = $request->validate($this->rules());
+        $data['user_id'] = auth()->id();   // the logged-in student
+
+        Timetable::create($data);
 
         return redirect()->route('timetables.index')->with('success', 'Timetable added.');
     }
