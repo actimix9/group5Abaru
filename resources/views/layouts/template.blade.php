@@ -702,39 +702,7 @@
 
                         <ul class="nav nav-treeview">
 
-                            <!-- STUDENTS DROPDOWN -->
-                            <li class="nav-item {{ request()->routeIs('students.*') ? 'menu-open' : '' }}">
-
-                                <a href="#"
-                                   class="nav-link {{ request()->routeIs('students.*') ? 'active' : '' }}">
-
-                                    <i class="nav-icon fas fa-user-graduate"></i>
-
-                                    <p>
-                                        Students
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-
-                                </a>
-
-                                <ul class="nav nav-treeview">
-
-                                    <li class="nav-item">
-                                        <a href="{{ route('students.index') }}"
-                                           class="nav-link {{ request()->routeIs('students.index') ? 'active' : '' }}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>List of Students</p>
-                                        </a>
-                                    </li>
-
-                                   
-
-                                </ul>
-
-                            </li>
-
                             @foreach($menus as $menu)
-                            @continue($menu['route'] === 'students.index')
                             <li class="nav-item">
 
                                 @if(Route::has($menu['route']))
